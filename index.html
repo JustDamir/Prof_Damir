@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prof Damir - Профессиональная дистрибуция</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #8cb8c1;
+            --dark: #2a2a2a;
+            --gradient-1: rgba(255,255,255,0.96);
+            --gradient-2: rgba(230,242,245,0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: white;
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Шапка */
+        .header {
+            text-align: center;
+            padding: 80px 0 120px;
+            background: linear-gradient(45deg, var(--gradient-1), var(--gradient-2)),
+                        url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="%238cb8c110" d="M45.7,-50.1C58.1,-40.2,66.1,-24.9,66.4,-9.7C66.7,5.4,59.3,20.4,50.3,33.9C41.3,47.4,30.7,59.4,16.9,67.1C3.1,74.8,-13.9,78.2,-27.3,73.1C-40.7,68,-50.5,54.4,-59.1,40.2C-67.6,26,-74,11,-73.9,-4.1C-73.7,-19.2,-67,-38.5,-55.7,-49.6C-44.3,-60.7,-28.3,-63.7,-11.9,-59.2C4.5,-54.7,20.4,-42.8,33.3,-32.3C46.2,-21.9,56.2,-12.9,59.7,-1.4C63.2,10.1,60.1,20.2,54.5,32.1C48.9,44,40.8,57.6,28.9,63.9C17,70.2,1.4,69.1,-10.7,64.1C-22.8,59.1,-31.3,50.1,-40.8,40.2C-50.3,30.3,-60.7,19.5,-65.1,6.2C-69.4,-7.2,-67.6,-22.9,-59.5,-34.2C-51.4,-45.5,-37,-52.3,-22.8,-60.2C-8.6,-68.1,5.3,-77.1,17.7,-74.3C30.1,-71.5,40.9,-56.8,45.7,-50.1Z"/></svg>');
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+            animation: gradientFlow 15s ease infinite;
+            background-size: 400% 400%;
+        }
+
+        .logo {
+            max-width: 300px;
+            height: auto;
+            margin: 0 auto 20px;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .header-description {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 0 2px 5px rgba(255,255,255,0.5));
+        }
+
+        .content-section {
+            padding: 80px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: currentColor;
+            transition: width 0.3s ease, opacity 0.5s ease;
+            opacity: 0;
+        }
+
+        h2.in-view::after {
+            opacity: 1;
+        }
+
+        h2:hover::after {
+            width: 120px;
+        }
+
+        .bg-accent h2 {
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .bg-white h2 {
+            color: var(--dark);
+        }
+
+        .bg-white { background: white; }
+        .bg-accent { background: var(--accent); }
+
+        .clients-grid,
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            justify-items: center;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .client-logo,
+        .partner-logo {
+            max-width: 180px;
+            max-height: 100px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08));
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275));
+        }
+
+        .client-logo:hover,
+        .partner-logo:hover {
+            transform: scale(1.05) rotate(-2deg);
+            z-index: 2;
+        }
+
+        .product-card {
+            padding: 20px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08));
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: transform 0.5s ease, filter 0.3s ease;
+        }
+
+        .product-image:hover img {
+            transform: scale(1.05) rotate(1deg);
+            filter: brightness(1.1);
+        }
+
+        footer {
+            padding: 60px 20px 30px;
+            text-align: center;
+            margin-top: auto;
+            position: relative;
+            z-index: 2;
+            font-weight: 600;
+            background: var(--accent);
+            color: white;
+            clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 100%);
+            transition: all 0.5s ease;
+        }
+
+        footer:hover {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .floating-bg {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: rgba(140,184,193,0.08);
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            animation: float 20s linear infinite;
+            opacity: 0.3;
+        }
+
+        .floating-bg:nth-child(2) {
+            animation-delay: -10s;
+            top: 20%;
+            left: 60%;
+        }
+
+        /* НОВЫЕ СТИЛИ ДЛЯ ФОРМЫ */
+        .contact-form {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background: #7aa8b1;
+            transform: translateY(-2px);
+        }
+        
+        footer.bg-white p {
+            color: var(--dark);
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 60px 0 80px;
+            }
+            
+            .logo {
+                max-width: 200px;
+            }
+            
+            .content-section {
+                padding: 60px 20px;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .client-logo,
+            .partner-logo {
+                max-width: 140px;
+                padding: 10px;
+            }
+            
+            .products-grid {
+                gap: 20px;
+            }
+            
+            .product-image img {
+                height: 150px;
+            }
+            
+            footer {
+                padding: 40px 20px 20px;
+            }
+            
+            .contact-form {
+                padding: 20px;
+            }
+        }
+
+        .accent-color {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-bg"></div>
+    <div class="floating-bg"></div>
+
+    <header class="header">
+        <img src="images/logo.png" alt="PROF DAMIR" class="logo">
+        <p class="header-description">
+            Официальный дистрибьютор профессиональной косметики премиум-класса
+        </p>
+    </header>
+
+    <section class="clients-section bg-accent">
+        <div class="content-section">
+            <h2>Наши покупатели</h2>
+            <div class="clients-grid">
+                <img src="images/clients/estel.jpg" alt="Эстель" class="client-logo">
+                <img src="images/clients/barberpro.jpg" alt="BarberPRO" class="client-logo">
+                <img src="images/clients/spa.jpg" alt="Лазурный" class="client-logo">
+                <img src="images/clients/charm.jpg" alt="Шарм" class="client-logo">
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white">
+        <div class="content-section">
+            <h2>Наши партнёры</h2>
+            <div class="partners-grid">
+                <img src="images/partners/kapous.png" alt="Kapous" class="partner-logo">
+                <img src="images/partners/depilflax.png" alt="Depilflax" class="partner-logo">
+                <img src="images/partners/white-line.png" alt="WHITE LINE" class="partner-logo">
+                <img src="images/partners/pro-cosmetics.png" alt="Professional cosmetics" class="partner-logo">
+                <img src="images/partners/italwax.png" alt="ItalWax" class="partner-logo">
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-accent">
+        <div class="content-section">
+            <h2>Наша продукция</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/products/paint.png" alt="Профессиональные краски">
+                    </div>
+                    <h3 class="accent-color">Краски для волос</h3>
+                    <p>Широкая палитра стойких цветов с эффектом ухода</p>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/products/cosmetics.jpg" alt="Уходовая косметика">
+                    </div>
+                    <h3 class="accent-color">Депиляция</h3>
+                    <p>Элитные средства для профессионального ухода</p>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/products/chemistry.jpg" alt="Расходники">
+                    </div>
+                    <h3 class="accent-color">Расходники</h3>
+                    <p>Инновационные решения для идеальной чистоты</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Новая секция с формой -->
+    <section class="bg-white">
+        <div class="content-section">
+            <h2>Свяжитесь с нами</h2>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Ваше имя</label>
+                    <input type="text" id="name" name="name" placeholder="Иван Иванов" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="example@mail.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Сообщение</label>
+                    <textarea id="message" name="message" placeholder="Ваше сообщение..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Отправить</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="bg-white">
+        <p>© PROF DAMIR 2025 | Все права защищены</p>
+    </footer>
+
+    <script>
+        // Анимация подчёркивания при скролле
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, { 
+            threshold: 0.5,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        document.querySelectorAll('h2').forEach((h2) => {
+            observer.observe(h2);
+        });
+
+        // Предотвращение отправки формы
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Форма не отправляется, это демонстрация');
+        });
+    </script>
+</body>
+</html>
