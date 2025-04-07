@@ -161,6 +161,12 @@
             margin-top: 60px;
         }
 
+        .grid--contacts {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
         /* Card components */
         .card {
             padding: 20px;
@@ -188,6 +194,51 @@
         .card:hover .card__image {
             transform: scale(1.05) rotate(1deg);
             filter: brightness(1.1);
+        }
+
+        /* Contact card */
+        .contact-card {
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--color-accent);
+            margin-bottom: 20px;
+        }
+
+        .contact-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--color-dark);
+        }
+
+        .contact-info {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .contact-link {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-link:hover {
+            color: #7aa8b1;
+            text-decoration: underline;
         }
 
         /* Logo components */
@@ -333,7 +384,8 @@
                 padding: 10px;
             }
             
-            .grid--products {
+            .grid--products,
+            .grid--contacts {
                 gap: 20px;
             }
             
@@ -376,7 +428,7 @@
                 <img src="italwax-logo.png" alt="WHITE LINE" class="logo-item">
                 <img src="6d58da878ad3aa59119623ecfe474f7f.jpg" alt="Professional cosmetics" class="logo-item">
                 <img src="images.png" alt="ItalWax" class="logo-item">
-				<img src="logo2.png" alt="ItalWax" class="logo-item">
+                <img src="logo2.png" alt="ItalWax" class="logo-item">
             </div>
         </div>
     </section>
@@ -424,6 +476,38 @@
                 </div>
                 <button type="submit" class="btn">Отправить</button>
             </form>
+        </div>
+    </section>
+
+    <!-- Contacts section -->
+    <section class="section section--accent">
+        <div class="container">
+            <h2 class="heading heading--white">Контакты</h2>
+            <div class="grid grid--contacts">
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <h3 class="contact-title">Горячая линия </h3>
+                    <p class="contact-info">
+                     +7928 970 54 84  
+                    </p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <h3 class="contact-title">Телефоны</h3>
+                    <p class="contact-info">
+                        <a href="tel:+74951234567" class="contact-link">Ставропольский край и КЧР - +7 938 353 48 14</a><br>
+                        <a href="tel:+79161234567" class="contact-link">КБР - +7 928 690 83 00</a>
+						<a href="tel:+79161234567" class="contact-link">РСО - Алания - +7 938 885 59 49</a>
+                    </p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">✉️</div>
+                    <h3 class="contact-title">Телграмм какнал</h3>
+                    <p class="contact-info">
+                        <a href="https://t.me/DamirProf" class="contact-link">DamirProf</a><br>
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
 
