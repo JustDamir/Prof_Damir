@@ -45,12 +45,93 @@
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
+            padding-top: 80px; /* Отступ для фиксированного меню */
         }
 
         img {
             max-width: 100%;
             height: auto;
             display: block;
+        }
+
+        /* Главное меню */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-md);
+            z-index: 1000;
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+
+        .main-nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: var(--shadow-lg);
+            padding: 10px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            height: 50px;
+            transition: var(--transition);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 30px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--color-dark);
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-link:hover {
+            color: var(--color-accent);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--color-dark);
         }
 
         /* Utility classes */
@@ -362,7 +443,44 @@
         }
 
         /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: rgba(255, 255, 255, 0.98);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 30px;
+                transition: var(--transition);
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-item {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .main-nav.scrolled .nav-menu {
+                top: 60px;
+                height: calc(100vh - 60px);
+            }
+        }
+
         @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+            
             .header {
                 padding: 60px 0 80px;
             }
@@ -400,6 +518,10 @@
             .form {
                 padding: 20px;
             }
+            
+            .nav-logo {
+                height: 40px;
+            }
         }
     </style>
 </head>
@@ -407,6 +529,24 @@
     <!-- Background elements -->
     <div class="bg-element"></div>
     <div class="bg-element"></div>
+
+    <!-- Главное меню -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-container">
+            <a href="#">
+                <img src="prof_damir_logo.png" alt="PROF DAMIR" class="nav-logo">
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="#partners" class="nav-link">Партнёры</a></li>
+                <li class="nav-item"><a href="#products" class="nav-link">Продукция</a></li>
+                <li class="nav-item"><a href="#contacts" class="nav-link">Контакты</a></li>
+                <li class="nav-item"><a href="#form" class="nav-link">Обратная связь</a></li>
+            </ul>
+        </div>
+    </nav>
 
     <!-- Header section -->
     <header class="header">
@@ -419,7 +559,7 @@
     </header>
 
     <!-- Partners section -->
-    <section class="section section--accent">
+    <section class="section section--accent" id="partners">
         <div class="container">
             <h2 class="heading heading--white">Наши партнёры</h2>
             <div class="grid grid--partners">
@@ -434,7 +574,7 @@
     </section>
 
     <!-- Products section -->
-    <section class="section section--white">
+    <section class="section section--white" id="products">
         <div class="container">
             <h2 class="heading heading--dark">Наша продукция</h2>
             <div class="grid grid--products">
@@ -458,7 +598,7 @@
     </section>
 
     <!-- Contact form section -->
-    <section class="section section--white">
+    <section class="section section--white" id="form">
         <div class="container">
             <h2 class="heading heading--dark">Свяжитесь с нами</h2>
             <form class="form" id="contactForm">
@@ -480,7 +620,7 @@
     </section>
 
     <!-- Contacts section -->
-    <section class="section section--accent">
+    <section class="section section--accent" id="contacts">
         <div class="container">
             <h2 class="heading heading--white">Контакты</h2>
             <div class="grid grid--contacts">
@@ -497,7 +637,7 @@
                     <p class="contact-info">
                         <a href="tel:+74951234567" class="contact-link">Ставропольский край и КЧР - +7 938 353 48 14</a><br>
                         <a href="tel:+79161234567" class="contact-link">КБР - +7 928 690 83 00</a>
-						<a href="tel:+79161234567" class="contact-link">РСО - Алания - +7 938 885 59 49</a>
+                        <a href="tel:+79161234567" class="contact-link">РСО - Алания - +7 938 885 59 49</a>
                     </p>
                 </div>
                 <div class="contact-card">
@@ -547,6 +687,51 @@
                     // В реальном проекте здесь будет код для отправки данных
                 });
             }
+
+            // Фиксированное меню при скролле
+            const mainNav = document.getElementById('mainNav');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    mainNav.classList.add('scrolled');
+                } else {
+                    mainNav.classList.remove('scrolled');
+                }
+            });
+
+            // Мобильное меню
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navMenu = document.getElementById('navMenu');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                this.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+            });
+
+            // Закрытие меню при клике на ссылку
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                    mobileMenuBtn.textContent = '☰';
+                });
+            });
+
+            // Плавная прокрутка
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
         });
     </script>
 </body>
