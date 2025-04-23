@@ -11,13 +11,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
-    <!-- Вынесены основные стили в head для более быстрой отрисовки -->
+    <!-- Основные стили -->
     <style>
         /* CSS Variables for easy theming */
         :root {
             --color-accent: #8cb8c1;
+            --color-accent-dark: #6c969e;
             --color-dark: #2a2a2a;
             --color-light: #ffffff;
+            --color-menu: #8cb8c1;
+            --color-menu-text: #ffffff;
             --gradient-1: rgba(255, 255, 255, 0.96);
             --gradient-2: rgba(230, 242, 245, 0.9);
             --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -60,7 +63,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.98);
+            background: var(--color-menu);
             box-shadow: var(--shadow-md);
             z-index: 1000;
             padding: 15px 0;
@@ -68,7 +71,7 @@
         }
 
         .main-nav.scrolled {
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--color-menu);
             box-shadow: var(--shadow-lg);
             padding: 10px 0;
         }
@@ -98,7 +101,7 @@
 
         .nav-link {
             text-decoration: none;
-            color: var(--color-dark);
+            color: var(--color-menu-text);
             font-weight: 600;
             font-size: 16px;
             transition: var(--transition);
@@ -107,7 +110,8 @@
         }
 
         .nav-link:hover {
-            color: var(--color-accent);
+            color: var(--color-light);
+            opacity: 0.9;
         }
 
         .nav-link::after {
@@ -117,7 +121,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--color-accent);
+            background: var(--color-light);
             transition: var(--transition);
         }
 
@@ -131,7 +135,7 @@
             border: none;
             font-size: 24px;
             cursor: pointer;
-            color: var(--color-dark);
+            color: var(--color-menu-text);
         }
 
         /* Utility classes */
@@ -318,7 +322,7 @@
         }
 
         .contact-link:hover {
-            color: #7aa8b1;
+            color: var(--color-accent-dark);
             text-decoration: underline;
         }
 
@@ -333,7 +337,15 @@
             transition: var(--transition);
         }
 
-        .logo-item:hover {
+        .section--accent .logo-item {
+            background: transparent;
+            box-shadow: none;
+            filter: brightness(0) invert(1);
+            padding: 10px;
+        }
+
+        .section--accent .logo-item:hover {
+            filter: brightness(0) invert(1) opacity(0.8);
             transform: scale(1.05) rotate(-2deg);
         }
 
@@ -381,7 +393,7 @@
 
         .btn {
             display: inline-block;
-            background: var(--color-accent);
+            background: var(--color-menu);
             color: var(--color-light);
             border: none;
             padding: 12px 30px;
@@ -390,11 +402,13 @@
             border-radius: var(--radius-sm);
             cursor: pointer;
             transition: var(--transition);
+            box-shadow: var(--shadow-sm);
         }
 
         .btn:hover {
-            background: #7aa8b1;
+            background: var(--color-accent-dark);
             transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         /* Footer */
@@ -450,7 +464,7 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 80px);
-                background: rgba(255, 255, 255, 0.98);
+                background: var(--color-menu);
                 flex-direction: column;
                 align-items: center;
                 justify-content: flex-start;
@@ -626,23 +640,23 @@
             <div class="grid grid--contacts">
                 <div class="contact-card">
                     <div class="contact-icon">📍</div>
-                    <h3 class="contact-title">Горячая линия </h3>
-                    <p class="contact-info">
-                     +7928 970 54 84  
+                    <h3 class="contact-title">Горячая линия</h3>
+                    <p class="contact-link"
+                       href="tel:+79289705484"> +7 928 970 54 84 
                     </p>
                 </div>
                 <div class="contact-card">
-                    <div class="contact-icon">📞</div>
+                    <div class=".contact-icon">📞</div>
                     <h3 class="contact-title">Телефоны</h3>
                     <p class="contact-info">
-                        <a href="tel:+74951234567" class="contact-link">Ставропольский край и КЧР - +7 938 353 48 14</a><br>
-                        <a href="tel:+79161234567" class="contact-link">КБР - +7 928 690 83 00</a>
-                        <a href="tel:+79161234567" class="contact-link">РСО - Алания - +7 938 885 59 49</a>
+                        <a href="tel:+79383534814" class="contact-link">Став. край и КЧР - +7 938 353 48 14</a><br>
+                        <a href="tel:+79286908300" class="contact-link">КБР - +7 928 690 83 00</a><br>
+                        <a href="tel:+79388855949" class="contact-link">РСО - Алания - +7 938 885 59 49</a>
                     </p>
                 </div>
                 <div class="contact-card">
                     <div class="contact-icon">✉️</div>
-                    <h3 class="contact-title">Телграмм какнал</h3>
+                    <h3 class="contact-title">Телеграмм канал</h3>
                     <p class="contact-info">
                         <a href="https://t.me/DamirProf" class="contact-link">DamirProf</a><br>
                     </p>
