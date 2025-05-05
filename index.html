@@ -6,407 +6,141 @@
     <title>Prof Damir - Профессиональная дистрибуция косметики</title>
     <meta name="description" content="Официальный дистрибьютор профессиональной косметики премиум-класса">
     
-    <!-- Предзагрузка шрифтов -->
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- Шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
-    <!-- Вынесены основные стили в head для более быстрой отрисовки -->
-    <style>
-        /* CSS Variables for easy theming */
-        :root {
-            --color-accent: #8cb8c1;
-            --color-dark: #2a2a2a;
-            --color-light: #ffffff;
-            --gradient-1: rgba(255, 255, 255, 0.96);
-            --gradient-2: rgba(230, 242, 245, 0.9);
-            --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 5px 20px rgba(0, 0, 0, 0.1);
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --transition: all 0.3s ease;
-        }
-
-        /* Base styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--color-dark);
-            background-color: var(--color-light);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Utility classes */
-        .text-center { text-align: center; }
-        .mx-auto { margin-left: auto; margin-right: auto; }
-        .my-20 { margin-top: 20px; margin-bottom: 20px; }
-        .mb-40 { margin-bottom: 40px; }
-        
-        /* Layout components */
-        .container {
-            width: 100%;
-            max-width: 1400px;
-            padding: 0 20px;
-            margin: 0 auto;
-        }
-
-        .section {
-            padding: 80px 0;
-            position: relative;
-            z-index: 2;
-        }
-
-        .section--white { background-color: var(--color-light); }
-        .section--accent { background-color: var(--color-accent); }
-
-        /* Header styles */
-        .header {
-            padding: 80px 0 120px;
-            background: linear-gradient(45deg, var(--gradient-1), var(--gradient-2)),
-                        url('data:image/svg+xml,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="%238cb8c110" d="M45.7,-50.1C58.1,-40.2,66.1,-24.9,66.4,-9.7C66.7,5.4,59.3,20.4,50.3,33.9C41.3,47.4,30.7,59.4,16.9,67.1C3.1,74.8,-13.9,78.2,-27.3,73.1C-40.7,68,-50.5,54.4,-59.1,40.2C-67.6,26,-74,11,-73.9,-4.1C-73.7,-19.2,-67,-38.5,-55.7,-49.6C-44.3,-60.7,-28.3,-63.7,-11.9,-59.2C4.5,-54.7,20.4,-42.8,33.3,-32.3C46.2,-21.9,56.2,-12.9,59.7,-1.4C63.2,10.1,60.1,20.2,54.5,32.1C48.9,44,40.8,57.6,28.9,63.9C17,70.2,1.4,69.1,-10.7,64.1C-22.8,59.1,-31.3,50.1,-40.8,40.2C-50.3,30.3,-60.7,19.5,-65.1,6.2C-69.4,-7.2,-67.6,-22.9,-59.5,-34.2C-51.4,-45.5,-37,-52.3,-22.8,-60.2C-8.6,-68.1,5.3,-77.1,17.7,-74.3C30.1,-71.5,40.9,-56.8,45.7,-50.1Z"/></svg>');
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-            margin-bottom: 40px;
-            text-align: center;
-            animation: gradientFlow 15s ease infinite;
-            background-size: 400% 400%;
-        }
-
-        .logo {
-            max-width: 300px;
-            margin: 0 auto 20px;
-            filter: drop-shadow(var(--shadow-sm));
-            animation: float 4s ease-in-out infinite;
-        }
-
-        .header__description {
-            font-size: 1.2rem;
-            color: #666;
-            max-width: 600px;
-            text-shadow: 0 2px 5px rgba(255, 255, 255, 0.5);
-        }
-
-        /* Typography */
-        .heading {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 15px;
-        }
-
-        .heading--white { color: var(--color-light); }
-        .heading--dark { color: var(--color-dark); }
-
-        .heading::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: currentColor;
-            transition: var(--transition);
-            opacity: 0;
-        }
-
-        .heading.in-view::after {
-            opacity: 1;
-        }
-
-        .heading:hover::after {
-            width: 120px;
-        }
-
-        .accent-text {
-            color: var(--color-accent);
-            font-family: 'Playfair Display', serif;
-            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Grid components */
-        .grid {
-            display: grid;
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .grid--partners {
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            justify-items: center;
-        }
-
-        .grid--products {
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        /* Card components */
-        .card {
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: var(--radius-md);
-            text-align: center;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-        }
-
-        .card__image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: var(--radius-sm);
-            margin-bottom: 20px;
-            transition: var(--transition);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .card:hover .card__image {
-            transform: scale(1.05) rotate(1deg);
-            filter: brightness(1.1);
-        }
-
-        /* Logo components */
-        .logo-item {
-            max-width: 180px;
-            max-height: 100px;
-            padding: 15px;
-            background: var(--color-light);
-            border-radius: var(--radius-sm);
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-        }
-
-        .logo-item:hover {
-            transform: scale(1.05) rotate(-2deg);
-        }
-
-        /* Form components */
-        .form {
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 30px;
-            background: var(--color-light);
-            border-radius: var(--radius-md);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .form__group {
-            margin-bottom: 20px;
-        }
-
-        .form__label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--color-dark);
-        }
-
-        .form__input,
-        .form__textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: var(--radius-sm);
-            font-size: 16px;
-            transition: var(--transition);
-        }
-
-        .form__input:focus,
-        .form__textarea:focus {
-            border-color: var(--color-accent);
-            outline: none;
-        }
-
-        .form__textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .btn {
-            display: inline-block;
-            background: var(--color-accent);
-            color: var(--color-light);
-            border: none;
-            padding: 12px 30px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .btn:hover {
-            background: #7aa8b1;
-            transform: translateY(-2px);
-        }
-
-        /* Footer */
-        .footer {
-            padding: 60px 0 30px;
-            margin-top: auto;
-            background: var(--color-accent);
-            color: var(--color-light);
-            clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 100%);
-            transition: var(--transition);
-        }
-
-        .footer:hover {
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-        }
-
-        /* Background elements */
-        .bg-element {
-            position: fixed;
-            width: 600px;
-            height: 600px;
-            background: rgba(140, 184, 193, 0.08);
-            border-radius: 50%;
-            filter: blur(80px);
-            z-index: 0;
-            animation: float 20s linear infinite;
-            opacity: 0.3;
-        }
-
-        .bg-element:nth-child(2) {
-            animation-delay: -10s;
-            top: 20%;
-            left: 60%;
-        }
-
-        /* Animations */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes gradientFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .header {
-                padding: 60px 0 80px;
-            }
-            
-            .logo {
-                max-width: 200px;
-            }
-            
-            .section {
-                padding: 60px 0;
-            }
-            
-            .heading {
-                font-size: 2rem;
-            }
-            
-            .logo-item {
-                max-width: 140px;
-                padding: 10px;
-            }
-            
-            .grid--products {
-                gap: 20px;
-            }
-            
-            .card__image {
-                height: 150px;
-            }
-            
-            .footer {
-                padding: 40px 0 20px;
-            }
-            
-            .form {
-                padding: 20px;
-            }
-        }
-    </style>
+    <!-- Font Awesome для иконок -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Background elements -->
     <div class="bg-element"></div>
     <div class="bg-element"></div>
 
-    <!-- Header section -->
+    <!-- Навигация -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-container">
+            <a href="#">
+                <img src="img/prof_damir_logo.png" alt="PROF DAMIR" class="nav-logo">
+            </a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="#partners" class="nav-link"><i class="fas fa-handshake"></i> Партнёры</a></li>
+                <li class="nav-item"><a href="#products" class="nav-link"><i class="fas fa-book-open"></i> Продукция</a></li>
+                <li class="nav-item"><a href="#contacts" class="nav-link"><i class="fas fa-address-book"></i> Контакты</a></li>
+                <li class="nav-item"><a href="#form" class="nav-link"><i class="fas fa-envelope"></i> Обратная связь</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Шапка -->
     <header class="header">
         <div class="container">
-            <img src="prof_damir_logo.png" alt="PROF DAMIR" class="logo">
-            <p class="header__description mx-auto">
-                Официальный дистрибьютор профессиональной косметики премиум-класса
+            <img src="img/prof_damir_logo.png" alt="PROF DAMIR" class="logo">
+            <p class="header__description">
+                Официальный дистрибьютор профессиональной косметики премиум-класса в Южном Федеральном Округе
             </p>
         </div>
     </header>
 
-    <!-- Partners section -->
-    <section class="section section--accent">
+    <!-- Партнеры -->
+    <section class="section section--accent" id="partners">
         <div class="container">
             <h2 class="heading heading--white">Наши партнёры</h2>
             <div class="grid grid--partners">
-                <img src="kapous.png" alt="Kapous" class="logo-item">
-                <img src="cd.png" alt="Depilflax" class="logo-item">
-                <img src="italwax-logo.png" alt="WHITE LINE" class="logo-item">
-                <img src="6d58da878ad3aa59119623ecfe474f7f.jpg" alt="Professional cosmetics" class="logo-item">
-                <img src="images.png" alt="ItalWax" class="logo-item">
-				<img src="logo2.png" alt="ItalWax" class="logo-item">
+                <img src="logo/kapous_logo.png" alt="Kapous" class="logo-item">
+                <img src="logo/constand_delight_logo.png" alt="Constand delight" class="logo-item">
+                <img src="logo/italwax_logo.png" alt="Italwax" class="logo-item">
+                <img src="logo/depilflax_logo.jpg" alt="Depilflax" class="logo-item">
+                <img src="logo/white_line.png" alt="White line" class="logo-item">
+                <img src="logo/medikosm_logo.png" alt="Медикосм" class="logo-item">
             </div>
         </div>
     </section>
 
-    <!-- Products section -->
-    <section class="section section--white">
-        <div class="container">
-            <h2 class="heading heading--dark">Наша продукция</h2>
-            <div class="grid grid--products">
-                <div class="card">
-                    <img src="images/products/paint.png" alt="Профессиональные краски" class="card__image">
-                    <h3 class="accent-text">Краски для волос</h3>
-                    <p>Широкая палитра стойких цветов с эффектом ухода</p>
+<!-- Продукция PDF -->
+<section class="section section--white" id="products">
+    <div class="container">
+        <h2 class="heading heading--dark">Наша продукция</h2>
+        <div class="grid grid--products">
+            <!-- Первая строка - 4 каталога -->
+            <div class="pdf-card">
+                <div class="pdf-container">
+                    <iframe class="pdf-viewer" src="catalogs/catalog1.pdf#view=fitH"></iframe>
                 </div>
-                <div class="card">
-                    <img src="images/products/cosmetics.jpg" alt="Уходовая косметика" class="card__image">
-                    <h3 class="accent-text">Депиляция</h3>
-                    <p>Элитные средства для профессионального ухода</p>
+                <div class="pdf-info">
+                    <h3>Каталог Professional Studio 2025</h3>
+                    <button class="btn" onclick="openPdfModal('catalogs/catalog1.pdf')">Открыть в полном размере</button>
                 </div>
-                <div class="card">
-                    <img src="images/products/chemistry.jpg" alt="Расходники" class="card__image">
-                    <h3 class="accent-text">Расходники</h3>
-                    <p>Инновационные решения для идеальной чистоты</p>
+            </div>
+            <div class="pdf-card">
+                <div class="pdf-container">
+                    <iframe class="pdf-viewer" src="catalogs/catalog2.pdf#view=fitH"></iframe>
+                </div>
+                <div class="pdf-info">
+                    <h3>Каталог депиляции 2025</h3>
+                    <button class="btn" onclick="openPdfModal('catalogs/catalog2.pdf')">Открыть в полном размере</button>
+                </div>
+            </div>
+            <div class="pdf-card">
+                <div class="pdf-container">
+                    <iframe class="pdf-viewer" src="catalogs/catalog3.pdf#view=fitH"></iframe>
+                </div>
+                <div class="pdf-info">
+                    <h3>Каталог уходовой косметики</h3>
+                    <button class="btn" onclick="openPdfModal('catalogs/catalog3.pdf')">Открыть в полном размере</button>
+                </div>
+            </div>
+            <div class="pdf-card">
+                <div class="pdf-container">
+                    <iframe class="pdf-viewer" src="catalogs/catalog4.pdf#view=fitH"></iframe>
+                </div>
+                <div class="pdf-info">
+                    <h3>Каталог инструментов</h3>
+                    <button class="btn" onclick="openPdfModal('catalogs/catalog4.pdf')">Открыть в полном размере</button>
+                </div>
+            </div>
+            
+            <!-- Вторая строка - 3 каталога -->
+            <div class="pdf-card">
+                <div class="pdf-container">
+                    <iframe class="pdf-viewer" src="catalogs/catalog5.pdf#view=fitH"></iframe>
+                </div>
+                <div class="pdf-info">
+                    <h3>Каталог аксессуаров</h3>
+                    <button class="btn" onclick="openPdfModal('catalogs/catalog5.pdf')">Открыть в полном размере</button>
+                </div>
+            </div>
+            <div class="pdf-card">
+                <div class="pdf-container">
+                    <iframe class="pdf-viewer" src="catalogs/catalog6.pdf#view=fitH"></iframe>
+                </div>
+                <div class="pdf-info">
+                    <h3>Каталог для салонов</h3>
+                    <button class="btn" onclick="openPdfModal('catalogs/catalog6.pdf')">Открыть в полном размере</button>
+                </div>
+            </div>
+            <div class="pdf-card">
+                <div class="pdf-container">
+                    <iframe class="pdf-viewer" src="catalogs/catalog7.pdf#view=fitH"></iframe>
+                </div>
+                <div class="pdf-info">
+                    <h3>Специальные предложения</h3>
+                    <button class="btn" onclick="openPdfModal('catalogs/catalog7.pdf')">Открыть в полном размере</button>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Contact form section -->
-    <section class="section section--white">
+    <!-- Форма -->
+    <section class="section section--white" id="form">
         <div class="container">
             <h2 class="heading heading--dark">Свяжитесь с нами</h2>
             <form class="form" id="contactForm">
@@ -419,51 +153,226 @@
                     <input type="email" id="email" class="form__input" placeholder="example@mail.com" required>
                 </div>
                 <div class="form__group">
+                    <label for="phone" class="form__label">Телефон (необязательно)</label>
+                    <input type="tel" id="phone" class="form__input" placeholder="+7 (XXX) XXX-XX-XX">
+                </div>
+                <div class="form__group">
                     <label for="message" class="form__label">Сообщение</label>
                     <textarea id="message" class="form__textarea" placeholder="Ваше сообщение..." required></textarea>
                 </div>
-                <button type="submit" class="btn">Отправить</button>
+                <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Отправить</button>
             </form>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Контакты -->
+    <section class="section section--accent" id="contacts">
+        <div class="container">
+            <h2 class="heading heading--white">Контакты</h2>
+            <div class="grid grid--contacts">
+                <div class="contact-card">
+                    <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                    <h3 class="contact-title">Горячая линия</h3>
+                    <p class="contact-info">
+                        <a href="tel:+79289705484" class="contact-link">+7 (928) 970-54-84</a>
+                    </p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h3 class="contact-title">Региональные менеджеры</h3>
+                    <p class="contact-info">
+                        <a href="tel:+79383534814" class="contact-link">Ставропольский край и КЧР<br>+7 (938) 353-48-14</a><br>
+                        <a href="tel:+79286908300" class="contact-link">Кабардино-Балкария<br>+7 (928) 690-83-00</a><br>
+                        <a href="tel:+79388855949" class="contact-link">Северная Осетия<br>+7 (938) 885-59-49</a>
+                    </p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon"><i class="fab fa-telegram"></i></div>
+                    <h3 class="contact-title">Телеграм</h3>
+                    <p class="contact-info">
+                        <a href="https://t.me/DamirProf" class="contact-link" target="_blank">@DamirProf</a><br>
+                        <a href="https://t.me/profdamir_bot" class="contact-link" target="_blank">@profdamir_bot</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
     <footer class="footer">
-        <div class="container text-center">
+        <div class="container text-center footer__content">
+            <img src="img/prof_damir_logo_white.png" alt="PROF DAMIR" style="height: 50px; margin-bottom: 20px;">
+            <p>Официальный дистрибьютор профессиональной косметики</p>
             <p>© PROF DAMIR 2025 | Все права защищены</p>
+            
+            <div class="social-links">
+                <a href="https://wa.me/79289705484" class="social-link" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://t.me/DamirProf" class="social-link" target="_blank"><i class="fab fa-telegram"></i></a>
+                <a href="viber://chat?number=79289705484" class="social-link" target="_blank"><i class="fab fa-viber"></i></a>
+                <a href="https://instagram.com/prof_damir" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
         </div>
     </footer>
 
+    <!-- PDF Модалка -->
+    <div class="pdf-modal" id="pdfModal">
+        <span class="modal-close" onclick="closePdfModal()">&times;</span>
+        <div class="pdf-modal-content">
+            <iframe id="pdfModalFrame" class="pdf-viewer"></iframe>
+        </div>
+    </div>
+
     <script>
-        // Анимация подчёркивания заголовков при скролле
-        document.addEventListener('DOMContentLoaded', function() {
-            const observerOptions = {
-                threshold: 0.5,
-                rootMargin: '0px 0px -50px 0px'
-            };
-            
-            const headingObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('in-view');
-                    }
-                });
-            }, observerOptions);
+        // Навигация
+        const mainNav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            mainNav.classList.toggle('scrolled', window.scrollY > 50);
+        });
 
-            document.querySelectorAll('.heading').forEach(heading => {
-                headingObserver.observe(heading);
+        // Мобильное меню
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.textContent = navMenu.classList.contains('active') ? '✕' : '☰';
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Закрытие меню при клике на ссылку
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if(navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    mobileMenuBtn.textContent = '☰';
+                    document.body.style.overflow = '';
+                }
             });
+        });
 
-            // Обработка формы
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    alert('Форма не отправляется, это демонстрация');
-                    // В реальном проекте здесь будет код для отправки данных
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) window.scrollTo({
+                    top: target.offsetTop - 80,
+                    behavior: 'smooth'
                 });
+            });
+        });
+
+        // Анимация заголовков при скролле
+        const headings = document.querySelectorAll('.heading');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        headings.forEach(heading => {
+            observer.observe(heading);
+        });
+
+        // PDF Функции
+        function openPdfModal(url) {
+            const modal = document.getElementById('pdfModal');
+            const frame = document.getElementById('pdfModalFrame');
+            
+            frame.src = url;
+            modal.style.display = 'block';
+            
+            // Анимация появления
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 10);
+            
+            // Блокировка скролла
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePdfModal() {
+            const modal = document.getElementById('pdfModal');
+            
+            // Анимация исчезновения
+            modal.classList.remove('active');
+            
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.getElementById('pdfModalFrame').src = '';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // Закрытие модалки по клику вне контента
+        document.getElementById('pdfModal').addEventListener('click', function(e) {
+            if(e.target === this) {
+                closePdfModal();
             }
         });
+
+        // Форма
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Здесь можно добавить AJAX отправку формы
+            const formData = {
+                name: this.name.value,
+                email: this.email.value,
+                phone: this.phone.value,
+                message: this.message.value
+            };
+            
+            console.log('Форма отправлена:', formData); // Для тестирования
+            
+            // Создаем красивый алерт
+            const alertDiv = document.createElement('div');
+            alertDiv.style.position = 'fixed';
+            alertDiv.style.top = '20px';
+            alertDiv.style.right = '20px';
+            alertDiv.style.backgroundColor = '#8cb8c1';
+            alertDiv.style.color = 'white';
+            alertDiv.style.padding = '15px 25px';
+            alertDiv.style.borderRadius = '8px';
+            alertDiv.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
+            alertDiv.style.zIndex = '9999';
+            alertDiv.style.display = 'flex';
+            alertDiv.style.alignItems = 'center';
+            alertDiv.style.gap = '10px';
+            alertDiv.style.transform = 'translateX(150%)';
+            alertDiv.style.transition = 'transform 0.3s ease';
+            
+            alertDiv.innerHTML = `
+                <i class="fas fa-check-circle" style="font-size: 1.2rem;"></i>
+                <span>Сообщение отправлено! Мы свяжемся с вами в ближайшее время.</span>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            setTimeout(() => {
+                alertDiv.style.transform = 'translateX(0)';
+            }, 10);
+            
+            setTimeout(() => {
+                alertDiv.style.transform = 'translateX(150%)';
+                setTimeout(() => {
+                    document.body.removeChild(alertDiv);
+                }, 300);
+            }, 3000);
+            
+            this.reset();
+        });
+
+        // Маска для телефона
+        const phoneInput = document.getElementById('phone');
+        if(phoneInput) {
+            phoneInput.addEventListener('input', function(e) {
+                let x = this.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+                this.value = !x[2] ? x[1] : x[1] + ' (' + x[2] + ') ' + x[3] + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
+            });
+        }
     </script>
 </body>
 </html>
